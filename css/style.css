@@ -1,0 +1,29 @@
+table, th, td {
+  border: 1px solid black;
+  text-align: center;
+}
+.center {
+    display:inline-block;
+    color: white;
+  }
+
+.custom{
+    margin: 10px;
+}
+/* button{
+    margin:20px;
+} */
+
+.spa{
+    display: flex;
+    justify-content: space-around;
+    align-content: stretch baseline;
+    margin:15px;
+}
+
+.spa-item{
+    align-self:flex-end;
+}
+.detail{
+    margin:10px;
+}

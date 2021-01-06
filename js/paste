@@ -1,0 +1,71 @@
+ <b-button v-b-modal.modal-prevent-closing>Open Modal</b-button>
+            <b-modal id="modal-prevent-closing" ref="modal" title="Submit Your Name">
+              
+                <div>
+
+                    <form ref="form" @submit.stop.prevent="handleSubmit">
+
+                        <p> Student Name: </p><input v-model="record.name" required/>
+
+                        <p> Fee: </p><input v-model="record.amount" required/>
+
+                        <p> Date of joining: </p><input v-model="record.joindate" required/>
+
+                        <p> Total Classes: </p> <input v-model="record.totalclasses" required/>
+
+
+                    </form>
+                    
+                </div>             
+              
+
+            
+             
+            </b-modal>
+
+
+
+
+
+
+
+                        <b-modal id="modal-prevent-closing" ref="modal" title="Submit Your Name" @show="resetModal"  @hidden="resetModal" @ok="handleOk">
+                
+                <form id="app" @submit="checkform" method="post">
+
+                    <p v-if="errors.length">
+                        <b>Please correct the following error(s):</b>
+                        <ul>
+                        <li v-for="error in errors">{{ error }}</li>
+                        </ul>
+                    </p>
+
+                    <label for="record.name">Name: </label>
+                    <input v-model="record.name" required/>
+
+
+                </form>
+                
+                
+                
+            </b-modal>
+
+
+
+
+
+                            <form id="app" @submit="checkform" method="post">
+
+                    <p v-if="errors.length">
+                        <b>Please correct the following error(s):</b>
+                        <ul>
+                        <li v-for="error in errors">{{ error }}</li>
+                        </ul>
+                    </p>
+
+
+
+
+
+                    <label for="record.name" ref="input"  required/>Name: </label>
+                    <input v-model="record.name" required/>
