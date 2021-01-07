@@ -102,10 +102,32 @@ Vue.component('add-compo',{
 
 
                     <form method="post"  @submit.stop.prevent="FormSubmit" ref="form" action="JavaScript:void(0)">
-                        <label for="record.name">Name: </label>
-                        <input v-model="record.name" required/>
 
-                        <input type="submit"></input>
+
+                        <div class="addContainer">
+                            <div class="adItems">
+                                <label for="record.name">Name: </label>
+                                <input v-model="record.name" required/>
+                            </div>
+
+                            <div class="adItems">
+                                <label for="record.amount">Fee: </label>
+                                <input v-model="record.amount" required/>
+                            </div>
+
+                            <div class="adItems">
+                                <label for="record.joindate">joindate: </label>
+                                <input v-model="record.joindate" required/>
+                            </div>
+                            
+                            <div class="adItems">
+                                <label for="record.totalClasses">totalClasses: </label>
+                                <input v-model="record.totalClasses" required/>
+                            </div>
+                        </div>
+
+                        
+                        <input class="isubmit" type="submit"></input>
 
                     </form>
                 
