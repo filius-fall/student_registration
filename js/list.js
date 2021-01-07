@@ -8,6 +8,7 @@ let listView = {
                     'name' : 'Student Name',
                     'amount' : 'Fee',
                     'joindate' : 'Date of Join',
+                    'modify' : 'Modify'
                 },
                 searchList : '',
                 addList : [],
@@ -33,7 +34,8 @@ let listView = {
                 this.studentsList = JSON.parse(data);
                 
             })    
-        }
+        },
+    
     },
     template: `
         <div>
@@ -64,15 +66,20 @@ let listView = {
                                     <th scope="col" v-for="keys,values in studentHeader"><p>{{ keys }}</p></th>
                                 </tr>
                             </thead>
+                            
+                            
+                            
                             <tbody v-for="data,index in studentsList">
+                                <tr v-if="studentsList[index]['name'] == searchList">
+                                    <td v-for="keys,values in studentHeader"><p>{{ data[values] }}</p></td>
+                                </tr>                                
                                 <tr v-if="studentsList[index]['name'] == searchList">
                                     <td v-for="keys,values in studentHeader"><p>{{ data[values] }}</p></td>
                                 </tr>
                                 <tr v-if="searchList == ''">
-                                    <td v-for="keys,values in studentHeader"><p>{{ data[values] }}</p></td>
-                                </tr>
-                                <tr v-else>
-                                    <td>No Records Found</td>
+                                    <td v-for="keys,values in studentHeader">
+                                        <p>{{ data[values] }}</p>
+                                    </td>
                                 </tr>
                             </tbody>
                             

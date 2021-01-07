@@ -84,7 +84,15 @@ Vue.component('add-compo',{
             console.log('Form submitted');
             this.$bvModal.hide('modal-prevent-closing');
             console.log(this.record.name.length)
-        }
+        },
+        resetModal() {
+            this.record.name = '';
+            this.record.joindate = '';
+            this.record.amount = '';
+            this.record.totalClasses = null;
+            this.detailState = null;
+            console.log('reset Modal')
+          },
     },
 
 
@@ -96,12 +104,12 @@ Vue.component('add-compo',{
         
             <b-button v-b-modal.modal-prevent-closing>Open Modal</b-button>
         
-            <b-modal id="modal-prevent-closing" ref="modal" title="Details" @show="resetModal" @hidden="resetModal" hide-footer>
+            <b-modal id="modal-prevent-closing" ref="modal" title="Details" show="resetModal" @hidden="resetModal" hide-footer>
                 
 
 
 
-                    <form method="post"  @submit.stop.prevent="FormSubmit" ref="form" action="JavaScript:void(0)">
+                    <form method="post"  @submit.stop.prevent="FormSubmit" ref="form" @ action="JavaScript:void(0)">
 
 
                         <div class="addContainer">
@@ -127,7 +135,7 @@ Vue.component('add-compo',{
                         </div>
 
                         
-                        <input class="isubmit" type="submit"></input>
+                        <input class="isubmit"type="submit" @click="addStudent"></input>
 
                     </form>
                 
