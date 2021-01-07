@@ -1,5 +1,4 @@
 
-
 let listView = {
     data(){
         return {
@@ -16,14 +15,18 @@ let listView = {
     },
     mounted(){
         console.log('list mounted'),
-        console.log(this.studentHeader['name'])
+        console.log(this.studentHeader['name']);
+        
+        // studentDB.setItem('details',JSON.stringify([studentInfo]));
 
     },
     created(){
         this.populateStudents();
+        this.settingDetails();
         this.$root.$on('Add::Student',(value)=>{
             console.log('Emit recieved'); 
             this.populateStudents();
+            
         });
 
     },
@@ -35,6 +38,19 @@ let listView = {
                 
             })    
         },
+        settingDetails(){
+            studentDB.length().then( (value)=> {
+                if(value === 0){
+                    var details = {};
+                    let jsonformat = JSON.stringify(details)
+                    console.log('NOTHING IN HERE');
+                    studentDB.setItem('details',jsonformat).then(()=>{
+                        console.log('DETAILS IS SET');
+                        console.log(jsonformat)
+                    })
+                }
+            })
+        }
     
     },
     template: `
@@ -52,7 +68,7 @@ let listView = {
             
             </div>
             <div class="container custom">
-                <template v-if="studentsList.length == 0">
+                <template v-if="studentsList == null">
                     <center>
                         No Students available
                     </center>

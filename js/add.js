@@ -42,6 +42,12 @@ Vue.component('add-compo',{
 
             console.log(myDict);
             alert("student details are registered");
+            console.log(this.record);
+
+            if(this.dbvalue === null){
+                this.dbvalue = [];
+                console.log('INSIDE IF DB')
+            }
 
             this.dbvalue.push(myDict);
             console.log(this.dbvalue);
