@@ -40,7 +40,7 @@ Vue.component('add-compo',{
             myDict['amount'] = this.record.amount;
             myDict['joindate'] = this.record.joindate;
             myDict['totalclasses'] = this.record.totalclasses;
-            myDict['id'] = this.id + 1;
+            myDict['id'] = this.record.id + 1;
 
             console.log(myDict);
             alert("student details are registered");

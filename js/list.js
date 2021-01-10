@@ -39,9 +39,9 @@ let listView = {
                 
             })    
         },
-        edit_details(val){
+        edit_details(val,in_val){
             console.log('DETAILS EDITED',val);
-            this.new_entry = val['name'];
+            this.new_entry = val['id'];
         },
         settingDetails(){
             studentDB.length().then( (value)=> {
@@ -65,6 +65,16 @@ let listView = {
         },
         EditSubmit(data,index){
             console.log(this.studentsList[index]['name'])
+            // this.delDetails(data,index);
+            console.log(data);
+            this.studentsList.splice(index,1);
+            this.studentsList.push(data);
+            const jfmt = JSON.stringify(this.studentsList)
+            studentDB.setItem('details',jfmt);
+
+        },
+        EditFormSubmit(){
+            console.log('Form ENDED')
         }
     
     },
@@ -135,18 +145,25 @@ let listView = {
                                     <td>
                                         <div class="td-container">
                                             <div class="td-items">
-                                                <b-button v-b-modal.edit-modal @click="edit_details(data)" >Edit {{ data['name'] }}</b-button>
-                                                <b-modal id="edit-modal" v-if="data['name'] === new_entry" hide-footer>
-                                                        <p>Hello {{ new_entry }}</p>
-                                                        <input v-model="data.name" >
+
+                                            
+                                                <b-button v-b-modal.edit-modal @click="edit_details(data,index)" >Edit {{ data['name'] }}</b-button>
+                                                <b-modal id="edit-modal" v-if="data['id'] === new_entry" hide-footer>
 
 
 
-                                                        <form method="post" action="JavaScript:void(0)" @submit.prevent.default="EditSubmit(data,index)">
+
+                                                        <form method="post"  @submit.stop.prevent="EditFormSubmit" action="JavaScript:void(0)">
 
 
                                                                 <label for="data.name">Name: </label>
                                                                 <input v-model="data.name" required/>
+
+                                                                <label for="data.joindate"> Date of Join: </label>
+                                                                <input v-model="data.joindate" required/>
+
+                                                                <label for="data.amount"> Fee: </label>
+                                                                <input v-model="data.amount" required/>
 
 
                                                                 <input class="isubmit" type="submit" @click="EditSubmit(data,index)">
