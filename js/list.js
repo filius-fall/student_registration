@@ -62,6 +62,9 @@ let listView = {
             this.studentsList.splice(b,1);
             const jform = JSON.stringify(this.studentsList);
             studentDB.setItem('details',jform);
+        },
+        EditSubmit(data,index){
+            console.log(this.studentsList[index]['name'])
         }
     
     },
@@ -133,9 +136,23 @@ let listView = {
                                         <div class="td-container">
                                             <div class="td-items">
                                                 <b-button v-b-modal.edit-modal @click="edit_details(data)" >Edit {{ data['name'] }}</b-button>
-                                                <b-modal id="edit-modal" v-if="data['name'] === new_entry">
+                                                <b-modal id="edit-modal" v-if="data['name'] === new_entry" hide-footer>
                                                         <p>Hello {{ new_entry }}</p>
-                                                        <input :value=data.name >
+                                                        <input v-model="data.name" >
+
+
+
+                                                        <form method="post" action="JavaScript:void(0)" @submit.prevent.default="EditSubmit(data,index)">
+
+
+                                                                <label for="data.name">Name: </label>
+                                                                <input v-model="data.name" required/>
+
+
+                                                                <input class="isubmit" type="submit" @click="EditSubmit(data,index)">
+
+                                                        </form>
+
                                                 </b-modal>
                                                 <br>
 

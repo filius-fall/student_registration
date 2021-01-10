@@ -125,7 +125,7 @@ Vue.component('add-compo',{
 
 
 
-                    <form method="post"  @submit.stop.prevent="FormSubmit" ref="form" @ action="JavaScript:void(0)">
+                    <form method="post"  @submit.stop.prevent="FormSubmit" ref="form"  action="JavaScript:void(0)">
 
 
                         <div class="addContainer">
