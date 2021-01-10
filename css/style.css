@@ -63,3 +63,17 @@ form {
 .isubmit{
     float: right;
 }
+
+.tables-container{
+  display: flex;
+  margin-left: 350px;
+}
+.detail{
+    justify-content: space-around; 
+}
+.td-container{
+  display: flex;
+}
+.td-items{
+  justify-content: space-between;
+}

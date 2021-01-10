@@ -19,6 +19,7 @@ Vue.component('add-compo',{
                 'amount' : '',
                 'joindate' : '',
                 'totalclasses' : '',
+                'id': 0,
             },
             dbvalue : [],
             detailState: null,
@@ -39,18 +40,24 @@ Vue.component('add-compo',{
             myDict['amount'] = this.record.amount;
             myDict['joindate'] = this.record.joindate;
             myDict['totalclasses'] = this.record.totalclasses;
+            myDict['id'] = this.id + 1;
 
             console.log(myDict);
             alert("student details are registered");
             console.log(this.record);
 
-            if(this.dbvalue === null){
+            if(myDict['name'] === ""){
                 this.dbvalue = [];
-                console.log('INSIDE IF DB')
+                console.log('INSIDE IF DICTNAME')
+                return;
             }
+            // if(this.dbvalue === null){
+            //     this.dbvalue = [];
+            //     console.log('INSIDE DB')
 
+            // }
             this.dbvalue.push(myDict);
-            console.log(this.dbvalue);
+            console.log("afet if",this.dbvalue);
 
             const jsonformat = JSON.stringify(this.dbvalue);
             studentDB.setItem('details',jsonformat).then(() => {
@@ -99,6 +106,9 @@ Vue.component('add-compo',{
             this.detailState = null;
             console.log('reset Modal')
           },
+          editDetails(){
+              console.log('edited');
+          }
     },
 
 

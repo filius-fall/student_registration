@@ -7,10 +7,11 @@ let listView = {
                     'name' : 'Student Name',
                     'amount' : 'Fee',
                     'joindate' : 'Date of Join',
-                    'modify' : 'Modify'
                 },
                 searchList : '',
                 addList : [],
+                new_entry: '',
+                t:'name'
         }
     },
     mounted(){
@@ -38,6 +39,10 @@ let listView = {
                 
             })    
         },
+        edit_details(val){
+            console.log('DETAILS EDITED',val);
+            this.new_entry = val['name'];
+        },
         settingDetails(){
             studentDB.length().then( (value)=> {
                 if(value === 0){
@@ -50,9 +55,17 @@ let listView = {
                     })
                 }
             })
+        },
+        delDetails(a,b){
+            console.log(a,b);
+            console.log(this.studentsList[b]);
+            this.studentsList.splice(b,1);
+            const jform = JSON.stringify(this.studentsList);
+            studentDB.setItem('details',jform);
         }
     
     },
+    props:['values'],
     template: `
         <div>
             <nav class="navbar navbar-dark bg-primary">
@@ -75,33 +88,77 @@ let listView = {
                 </template>
                 
                 <template v-else>
-                    <div class="detail">
+
+
+                    <div class="tables-container">
+                        <div class="detail">
+                                <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col" v-for="keys,values in studentHeader"><p>{{ keys }}</p></th>
+                                    </tr>
+                                </thead>
+                                
+                                
+                                
+                                <tbody>
+                                    <tr v-for="data,index in studentsList" v-if="studentsList[index]['name'] == searchList">
+                                        <td v-for="keys,values in studentHeader"><p>{{ data[values] }}</p></td>
+                                    </tr>
+
+                                    <tr v-for="data,index in studentsList" v-if="searchList == ''">
+                                        <td v-for="keys,values in studentHeader">
+                                            <p>{{ data[values] }}</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                                
+                                
+                            </table>
+
+
+
+                        </div>
+                        <div class="detail">
                             <table class="table">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col" v-for="keys,values in studentHeader"><p>{{ keys }}</p></th>
+                                    <th>Modify</th>
                                 </tr>
                             </thead>
-                            
-                            
-                            
-                            <tbody v-for="data,index in studentsList">
-                                <tr v-if="studentsList[index]['name'] == searchList">
-                                    <td v-for="keys,values in studentHeader"><p>{{ data[values] }}</p></td>
-                                </tr>                                
-                                <tr v-if="studentsList[index]['name'] == searchList">
-                                    <td v-for="keys,values in studentHeader"><p>{{ data[values] }}</p></td>
-                                </tr>
-                                <tr v-if="searchList == ''">
-                                    <td v-for="keys,values in studentHeader">
-                                        <p>{{ data[values] }}</p>
+
+                                <tr v-for="data,index in studentsList" v-if="searchList == ''">
+                                    <td>
+                                        <div class="td-container">
+                                            <div class="td-items">
+                                                <b-button v-b-modal.edit-modal @click="edit_details(data)" >Edit {{ data['name'] }}</b-button>
+                                                <b-modal id="edit-modal" v-if="data['name'] === new_entry">
+                                                        <p>Hello {{ new_entry }}</p>
+                                                        <input :value=data.name >
+                                                </b-modal>
+                                                <br>
+
+                                            </div>
+
+                                            <div class="td-items">
+                                                <button @click="delDetails(data,index)">del</button>
+                                            </div>
+
+                                        </div>
+
+
+
                                     </td>
                                 </tr>
-                            </tbody>
-                            
-                            
-                        </table>
+
+
+
+                            </table>
+                        </div>
+
                     </div>
+
                 </template>
             </div>
         </div>

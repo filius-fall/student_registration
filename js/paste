@@ -120,3 +120,57 @@
                 
                 
             </b-modal>
+
+
+
+
+                                <b-modal id="edit-modal">
+
+                                <form method="post"   @action="JavaScript:void(0)">
+
+
+                                    <div class="addContainer">
+                                        <div class="adItems">
+                                            <label>Name: </label>
+                                            <input value="sreeram" required/>
+                
+                                            <p>{{ studentsList[new_entry]['name'] }}</p>
+                                            <p>test1 {{ new_entry }}</p>
+                                        </div>
+            
+                                    </div>
+        
+                                
+                                    <input class="isubmit"type="submit"></input>
+        
+                            </form>
+
+                                </b-modal>
+
+
+
+
+                        <div class="detail">
+                            <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Modify</th>
+                                </tr>
+                            </thead>
+
+                                <tr v-for="data,index in studentsList" v-if="searchList == ''">
+                                    <td>
+                                        <p>
+                                            <b-button v-b-modal.edit-modal @click="edit_details(data)" >Edit {{ data['name'] }}{{ index }}</b-button>
+                                            <b-modal id="edit-modal" v-if="data['name'] === new_entry">
+                                                    <p>Hello {{ new_entry }}</p>
+                                            </b-modal>
+
+                                        </p>
+                                    </td>
+                                </tr>
+
+
+
+                            </table>
+                        </div>
