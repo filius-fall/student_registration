@@ -77,3 +77,11 @@ form {
 .td-items{
   justify-content: space-between;
 }
+
+td, th {
+  padding: 5px;
+}
+
+th {
+  cursor:pointer;
+}

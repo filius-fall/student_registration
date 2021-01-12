@@ -11,7 +11,9 @@ let listView = {
                 searchList : '',
                 addList : [],
                 new_entry: '',
-                t:'name'
+                currentSort:'name',
+                currentSortDir:'asc',
+    
         }
     },
     mounted(){
@@ -33,9 +35,16 @@ let listView = {
     },
 
     methods : {
+        sorts(s){
+            if(s===this.currentSort){
+                this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc'
+            }
+            this.currentSort = s;
+        },
         populateStudents(){
             studentDB.getItem('details').then((data)=>{
                 this.studentsList = JSON.parse(data);
+                // console.log(this.studentsList['name'].sort())
                 
             })    
         },
@@ -78,6 +87,28 @@ let listView = {
         }
     
     },
+    // computed: {
+    //     sorted(){
+    //         return this.studentsList.sort((a,b) => {
+    //             let modifier = 1;
+    //             if(this.currentSortDir == 'desc') modifier = -1;
+    //             if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
+    //             if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
+    //             return 0;
+    //         )};
+    //     }
+    // },
+    computed:{
+        sortedList:function() {
+          return this.studentsList.sort((a,b) => {
+            let modifier = 1;
+            if(this.currentSortDir === 'desc') modifier = -1;
+            if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
+            if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
+            return 0;
+          });
+        }
+      },
     props:['values'],
     template: `
         <div>
@@ -108,7 +139,7 @@ let listView = {
                                 <table class="table">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th scope="col" v-for="keys,values in studentHeader"><p>{{ keys }}</p></th>
+                                        <th scope="col" v-for="keys,values in studentHeader" @click="sorts(values)"><p>{{ keys }}</p></th>
                                     </tr>
                                 </thead>
                                 
@@ -119,7 +150,7 @@ let listView = {
                                         <td v-for="keys,values in studentHeader"><p>{{ data[values] }}</p></td>
                                     </tr>
 
-                                    <tr v-for="data,index in studentsList" v-if="searchList == ''">
+                                    <tr v-for="data,index in sortedList" v-if="searchList == ''">
                                         <td v-for="keys,values in studentHeader">
                                             <p>{{ data[values] }}</p>
                                         </td>

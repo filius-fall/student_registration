@@ -174,3 +174,13 @@
 
                             </table>
                         </div>
+
+                                    <tr v-for="data,index in studentsList" v-if="studentsList[index]['name'] == searchList">
+                                        <td v-for="keys,values in studentHeader"><p>{{ data[values] }}</p></td>
+                                    </tr>
+
+                                    <tr v-for="data,index in studentsList" v-if="searchList == ''">
+                                        <td v-for="keys,values in studentHeader">
+                                            <p>{{ data[values] }}</p>
+                                        </td>
+                                    </tr>
