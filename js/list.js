@@ -13,6 +13,8 @@ let listView = {
                 new_entry: '',
                 currentSort:'name',
                 currentSortDir:'asc',
+                amountList : '',
+                dateList:'',
     
         }
     },
@@ -151,18 +153,25 @@ let listView = {
                                     <tr class="searchRowBorder">
                                         <th>
                                             <p>
-                                                <label for='name'>Search :</label>
-                                                <input>
+                                                <label for="searchList">Search :</label><input v-model="searchList">
                                             </p>
                                         </th>
-                                        <th><p><label for='name'>Search :</label><input></p></th>
-                                        <th><p><label for='name'>Search :</label><input></p></th>
+                                        <th>
+                                            <p>
+                                                <label for="amountList">Search :</label><input v-model="amountList">
+                                            </p>
+                                        </th>
+                                        <th>
+                                        <p>
+                                            <label for="dateList">Search :</label><input v-model="dateList">
+                                        </p>
+                                    </th>
                                     </tr>
-                                    <tr v-for="data,index in studentsList" v-if="studentsList[index]['name'] == searchList">
+                                    <tr v-for="data,index in studentsList" v-if="studentsList[index]['name'] == searchList || studentsList[index]['amount'] == amountList || studentsList[index]['joindate'] == dateList">
                                         <td v-for="keys,values in studentHeader"><p>{{ data[values] }}</p></td>
                                     </tr>
 
-                                    <tr v-for="data,index in sortedList" v-if="searchList == ''">
+                                    <tr v-for="data,index in sortedList" v-if="searchList == '' && amountList == '' && dateList == '' ">
                                         <td v-for="keys,values in studentHeader">
                                             <p>{{ data[values] }}</p>
                                         </td>

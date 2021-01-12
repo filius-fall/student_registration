@@ -1,7 +1,7 @@
 Vue.component('search-compo',{
     template:`
             <div>
-                <p> Search: <input :value="searchList" @keyup.enter="$emit('update:searchList', $event.target.value)"/></p>
+                <p> <label for='searchList'>Search: </label> <input :value="searchList" @keyup.enter="$emit('update:searchList', $event.target.value)"/></p>
     
             </div>`,
 
