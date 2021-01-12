@@ -2,6 +2,10 @@ table, th, td {
   border: 1px solid black;
   text-align: center;
 }
+.tablecss{
+  width: 850px;
+  height: 100%;
+}
 .center {
     display:inline-block;
     color: white;
@@ -66,7 +70,7 @@ form {
 
 .tables-container{
   display: flex;
-  margin-left: 350px;
+  margin-left: 50px;
 }
 .detail{
     justify-content: space-around; 
@@ -84,4 +88,25 @@ td, th {
 
 th {
   cursor:pointer;
+}
+* {
+  box-sizing: border-box;
+}
+.modTable{
+  width: 300px;
+  height:100%
+}
+.modTable_th{
+  height: 60px;
+}
+.delButton{
+  /* margin-left: 10px; */
+  float: right;
+}
+.editButton{
+  float: left;
+}
+.searchRowBorder{
+  border-color: red;
+  height:10px;
 }

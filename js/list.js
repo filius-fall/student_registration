@@ -136,16 +136,28 @@ let listView = {
 
                     <div class="tables-container">
                         <div class="detail">
-                                <table class="table">
+                                <table class="tablecss table">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col" v-for="keys,values in studentHeader" @click="sorts(values)"><p>{{ keys }}</p></th>
                                     </tr>
+                                    
                                 </thead>
+
                                 
                                 
                                 
                                 <tbody>
+                                    <tr class="searchRowBorder">
+                                        <th>
+                                            <p>
+                                                <label for='name'>Search :</label>
+                                                <input>
+                                            </p>
+                                        </th>
+                                        <th><p><label for='name'>Search :</label><input></p></th>
+                                        <th><p><label for='name'>Search :</label><input></p></th>
+                                    </tr>
                                     <tr v-for="data,index in studentsList" v-if="studentsList[index]['name'] == searchList">
                                         <td v-for="keys,values in studentHeader"><p>{{ data[values] }}</p></td>
                                     </tr>
@@ -165,20 +177,34 @@ let listView = {
 
                         </div>
                         <div class="detail">
-                            <table class="table">
+                            <table class="table modTable">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>Modify</th>
+                                    <th class="modTable_th">Modify</th>
                                 </tr>
+
                             </thead>
+                                <tr>
+                                    <th>
+                                        <p>
+                                            <label>Search :</label>
+                                            <input>
+                                        </p>
+                                    </th>
+                                </tr>
 
                                 <tr v-for="data,index in studentsList" v-if="searchList == ''">
+
                                     <td>
-                                        <div class="td-container">
+                                        <div>
                                             <div class="td-items">
 
                                             
-                                                <b-button v-b-modal.edit-modal @click="edit_details(data,index)" >Edit {{ data['name'] }}</b-button>
+                                                
+                                            </div>
+
+
+                                            <b-button class="editButton" v-b-modal.edit-modal @click="edit_details(data,index)" >Edit {{ data['name'] }}</b-button>
                                                 <b-modal id="edit-modal" v-if="data['id'] === new_entry" hide-footer>
 
 
@@ -202,13 +228,11 @@ let listView = {
                                                         </form>
 
                                                 </b-modal>
-                                                <br>
 
-                                            </div>
 
-                                            <div class="td-items">
-                                                <button @click="delDetails(data,index)">del</button>
-                                            </div>
+                                            <b-button class="delButton" @click="delDetails(data,index)">Delete</b-button>
+
+                        
 
                                         </div>
 
