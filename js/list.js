@@ -15,6 +15,8 @@ let listView = {
                 currentSortDir:'asc',
                 amountList : '',
                 dateList:'',
+                CurrentPage:1,
+                PageSize:3
     
         }
     },
@@ -86,6 +88,12 @@ let listView = {
         },
         EditFormSubmit(){
             console.log('Form ENDED')
+        },
+        NextPage(){
+            if((this.CurrentPage * this.PageSize) < this.studentsList.length) this.CurrentPage++;
+        },
+        PrevPage(){
+            if(this.CurrentPage > 1) this.CurrentPage--;
         }
     
     },
@@ -108,6 +116,10 @@ let listView = {
             if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
             if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
             return 0;
+          }).filter((row,index) => {
+              let start = (this.CurrentPage-1) * this.PageSize;
+              let end = (this.CurrentPage) * this.PageSize;
+              if((index >= start) && (index < end)) return true;
           });
         }
       },
@@ -171,7 +183,7 @@ let listView = {
                                         <td v-for="keys,values in studentHeader"><p>{{ data[values] }}</p></td>
                                     </tr>
 
-                                    <tr v-for="data,index in sortedList" v-if="searchList == '' && amountList == '' && dateList == '' ">
+                                    <tr v-for="data,index in sortedList" v-if="searchList == ''">
                                         <td v-for="keys,values in studentHeader">
                                             <p>{{ data[values] }}</p>
                                         </td>
@@ -255,9 +267,19 @@ let listView = {
                             </table>
                         </div>
 
+
+
+
                     </div>
 
+                    <p class="td-container">
+                    <b-button class="pagination td-items" @click="PrevPage">Previous</b-button> 
+                    <b-button class="pagination td-items" @click="NextPage">Next</b-button>
+                </p>
+
                 </template>
+
+
             </div>
         </div>
     `,
