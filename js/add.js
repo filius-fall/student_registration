@@ -4,7 +4,7 @@ Vue.component('add-compo',{
         studentDB.getItem('details').then(value => {
             console.log(value);
             this.dbvalue = JSON.parse(value);
-            console.log(this.dbvalue)
+            console.log(this.dbvalue.length)
         })
         .catch(err => {
             console.log(err);
@@ -19,7 +19,7 @@ Vue.component('add-compo',{
                 'amount' : '',
                 'joindate' : '',
                 'totalclasses' : '',
-                'id': 0,
+                'id': '',
             },
             dbvalue : [],
             detailState: null,
@@ -33,18 +33,18 @@ Vue.component('add-compo',{
             //     console.log('empty return');
             //     return;
             // }
-            console.log('inside additmes');
+            // console.log('inside additmes');
             var myDict = {};
 
             myDict['name'] = this.record.name;
             myDict['amount'] = this.record.amount;
             myDict['joindate'] = this.record.joindate;
             myDict['totalclasses'] = this.record.totalclasses;
-            myDict['id'] = this.record.id + 1;
+            myDict['id'] = this.dbvalue.length;
 
-            console.log(myDict);
+           // console.log(myDict);
             alert("student details are registered");
-            console.log(this.record);
+           // console.log(this.record);
 
             if(myDict['name'] === ""){
                 this.dbvalue = [];
@@ -57,11 +57,11 @@ Vue.component('add-compo',{
 
             // }
             this.dbvalue.push(myDict);
-            console.log("afet if",this.dbvalue);
+            // console.log("afet if",this.dbvalue);
 
             const jsonformat = JSON.stringify(this.dbvalue);
             studentDB.setItem('details',jsonformat).then(() => {
-                console.log('Storage is Set!!!!');
+                // console.log('Storage is Set!!!!');
                 this.$root.$emit('Add::Student',jsonformat);
                 this.$root.$emit('exit',true);
             })
@@ -82,7 +82,7 @@ Vue.component('add-compo',{
             if(!this.checkFormValidity()){
                 return
             }
-            console.log("SUBMITTED");
+            // console.log("SUBMITTED");
             this.$nextTick(() => {
                 this.$bvModal.hide('modal-prevent-closing');
             })
@@ -90,7 +90,7 @@ Vue.component('add-compo',{
         FormSubmit(){
             // this.$refs.form.$el.submit();
             if(this.record.name == ""){
-                console.log('error')
+                // console.log('error')
                 return
             }
 
@@ -104,10 +104,10 @@ Vue.component('add-compo',{
             this.record.amount = '';
             this.record.totalClasses = null;
             this.detailState = null;
-            console.log('reset Modal')
+            // console.log('reset Modal')
           },
           editDetails(){
-              console.log('edited');
+            //   console.log('edited');
           }
     },
 

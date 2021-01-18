@@ -252,9 +252,14 @@ let listView = {
 
 
                                             <b-button class="delButton" @click="delDetails(data,index)">Delete</b-button>
+                                            
 
                         
 
+                                        </div>
+
+                                        <div>
+                                            <p>Classes {{ index }}</p>
                                         </div>
 
 
