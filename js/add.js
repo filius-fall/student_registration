@@ -145,8 +145,8 @@ Vue.component('add-compo',{
                             </div>
                             
                             <div class="adItems">
-                                <label for="record.totalClasses">totalClasses: </label>
-                                <input v-model="record.totalClasses" required/>
+                                <label for="record.totalclasses">Total Classes: </label>
+                                <input v-model="record.totalclasses" required/>
                             </div>
                         </div>
 
