@@ -251,7 +251,7 @@ let listView = {
                                                 </b-modal>
 
 
-                                            <b-button class="fas fa-trash-alt" variant="light" @click="delDetails(data,index)"></b-button>
+                                            <b-button class="icon-trash" variant="light" @click="delDetails(data,index)"></b-button>
 
                                             
                                             
@@ -282,8 +282,8 @@ let listView = {
                     </div>
 
                     <p class="td-container">
-                    <b-button class="pagination td-items" @click="PrevPage">Previous</b-button> 
-                    <b-button class="pagination td-items" @click="NextPage">Next</b-button>
+                    <b-button variant="light" class="icon-arrow-left pagination td-items" @click="PrevPage"></b-button> 
+                    <b-button variant="light" class="pagination td-items icon-arrow-right" @click="NextPage"></b-button>
                 </p>
 
                 </template>
