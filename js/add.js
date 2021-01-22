@@ -20,6 +20,7 @@ Vue.component('add-compo',{
                 'joindate' : '',
                 'totalclasses' : '',
                 'id': '',
+                'currentclasses':'',
             },
             dbvalue : [],
             detailState: null,

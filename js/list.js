@@ -225,7 +225,7 @@ let listView = {
                                             </div>
 
 
-                                            <b-button class="editButton" v-b-modal.edit-modal @click="edit_details(data,index)" >Edit {{ data['name'] }}</b-button>
+                                            <b-button class="icon-edit" variant="light" v-b-modal.edit-modal @click="edit_details(data,index)" ></b-button>
                                                 <b-modal id="edit-modal" v-if="data['id'] === new_entry" hide-footer>
 
 
@@ -251,7 +251,11 @@ let listView = {
                                                 </b-modal>
 
 
-                                            <b-button class="delButton" @click="delDetails(data,index)">Delete</b-button>
+                                            <b-button class="fas fa-trash-alt" variant="light" @click="delDetails(data,index)"></b-button>
+
+                                            
+                                            
+
                                             
 
                         
