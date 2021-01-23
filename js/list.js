@@ -205,7 +205,7 @@ let listView = {
                                 </tr>
 
                             </thead>
-                                <tr>
+                                <tr class="modify_tr">
                                     <th>
                                         <p>
                                             <label>Search :</label>
@@ -217,42 +217,49 @@ let listView = {
                                 <tr v-for="data,index in studentsList" v-if="searchList == ''">
 
                                     <td>
-                                        <div>
+                                        <div class="td-container">
                                             <div class="td-items">
 
-                                            
+                                                    <b-button class="icon-edit" variant="light" v-b-modal.edit-modal @click="edit_details(data,index)" ></b-button>
+                                                    <b-modal id="edit-modal" v-if="data['id'] === new_entry" hide-footer>
+
+
+
+
+                                                            <form method="post"  @submit.stop.prevent="EditFormSubmit" action="JavaScript:void(0)">
+
+
+                                                                    <label for="data.name">Name: </label>
+                                                                    <input v-model="data.name" required/>
+
+                                                                    <label for="data.joindate"> Date of Join: </label>
+                                                                    <input v-model="data.joindate" required/>
+
+                                                                    <label for="data.amount"> Fee: </label>
+                                                                    <input v-model="data.amount" required/>
+
+
+                                                                    <input class="isubmit" type="submit" @click="EditSubmit(data,index)">
+
+                                                            </form>
+
+                                                    </b-modal>
+
+
+                                                <b-button class="icon-trash" variant="light" @click="delDetails(data,index)"></b-button>
                                                 
                                             </div>
 
 
-                                            <b-button class="icon-edit" variant="light" v-b-modal.edit-modal @click="edit_details(data,index)" ></b-button>
-                                                <b-modal id="edit-modal" v-if="data['id'] === new_entry" hide-footer>
+                                            
 
+                                            <div class="td-items">
+                                                <b-button class="icon-plus" variant="light"></b-button>
+                                                <input size="2">
+                                                <b-button class="icon-minus" variant="light"></b-button>
 
-
-
-                                                        <form method="post"  @submit.stop.prevent="EditFormSubmit" action="JavaScript:void(0)">
-
-
-                                                                <label for="data.name">Name: </label>
-                                                                <input v-model="data.name" required/>
-
-                                                                <label for="data.joindate"> Date of Join: </label>
-                                                                <input v-model="data.joindate" required/>
-
-                                                                <label for="data.amount"> Fee: </label>
-                                                                <input v-model="data.amount" required/>
-
-
-                                                                <input class="isubmit" type="submit" @click="EditSubmit(data,index)">
-
-                                                        </form>
-
-                                                </b-modal>
-
-
-                                            <b-button class="icon-trash" variant="light" @click="delDetails(data,index)"></b-button>
-
+                                            
+                                            </div>
                                             
                                             
 
@@ -262,9 +269,7 @@ let listView = {
 
                                         </div>
 
-                                        <div>
-                                            <p>Classes {{ index }}</p>
-                                        </div>
+                                        
 
 
 

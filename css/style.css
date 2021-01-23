@@ -97,7 +97,7 @@ th {
   height:100%
 }
 .modTable_th{
-  height: 60px;
+  height: 55px;
 }
 .delButton{
   /* margin-left: 10px; */
@@ -112,4 +112,8 @@ th {
 }
 .pagination{
   margin-left: 30px;
+}
+.modify_tr{
+  height: 30px;
+  overflow: hidden;
 }
