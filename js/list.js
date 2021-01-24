@@ -94,6 +94,25 @@ let listView = {
         },
         PrevPage(){
             if(this.CurrentPage > 1) this.CurrentPage--;
+        },
+        inc_classes(d,e){
+            
+            d.currentClasses += 1;
+            this.EditSubmit(d,e);
+            console.log("INCREMENT");
+        },
+        dec_classes(d,e){
+            if (d.currentClasses === 0){
+                console.log('DEAD END');
+                return
+            }
+            else{
+
+                d.currentClasses -= 1;
+                this.EditSubmit(d,e);
+                console.log('DECREMENT')
+            }
+            
         }
     
     },
@@ -254,9 +273,10 @@ let listView = {
                                             
 
                                             <div class="td-items">
-                                                <b-button class="icon-plus" variant="light"></b-button>
-                                                <input size="2">
-                                                <b-button class="icon-minus" variant="light"></b-button>
+                                                <b-button class="icon-plus" variant="light" @click="inc_classes(data,index)"></b-button>
+                                                <input size="2" v-model="data.currentClasses">
+                                                
+                                                <b-button class="icon-minus" variant="light" @click="dec_classes(data,index)"></b-button>
 
                                             
                                             </div>

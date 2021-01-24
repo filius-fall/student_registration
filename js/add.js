@@ -20,7 +20,7 @@ Vue.component('add-compo',{
                 'joindate' : '',
                 'totalclasses' : '',
                 'id': '',
-                'currentclasses':'',
+                'currentclasses':0,
             },
             dbvalue : [],
             detailState: null,
@@ -42,6 +42,7 @@ Vue.component('add-compo',{
             myDict['joindate'] = this.record.joindate;
             myDict['totalclasses'] = this.record.totalclasses;
             myDict['id'] = this.dbvalue.length;
+            myDict['currentClasses'] = this.record.currentclasses;
 
            // console.log(myDict);
             alert("student details are registered");
