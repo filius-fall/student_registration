@@ -1,0 +1,21 @@
+{
+    "name": "Music Reg",
+    "short_name": "Music",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "A Music app.",
+    "icons": [
+      {
+        "src": "images/image01.png",
+        "sizes": "234x234",
+        "type": "image/png"
+      },
+      {
+        "src": "images/images02.jpeg",
+        "sizes": "1200x1200",
+        "type": "image/png"
+      }
+    ]
+  }
+  

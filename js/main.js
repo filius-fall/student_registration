@@ -34,4 +34,21 @@
                 <list-view ></list-view>
             </div>`
 
-  }) 
+  });
+
+
+
+  window.addEventListener('load',()=>{
+    registerSW();
+});
+
+async function registerSW(){
+    if('serviceWorker' in navigator){
+        try{
+            await navigator.serviceWorker.register('./sw.js');
+        }
+        catch(e){
+            console.log('Service registration failed: ',e);
+        }
+    }
+};
