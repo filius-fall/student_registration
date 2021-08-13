@@ -120,7 +120,7 @@ Vue.component('add-compo',{
 
             
         
-            <b-button v-b-modal.modal-prevent-closing>Open Modal</b-button>
+            <b-button v-b-modal.modal-prevent-closing>Add Students</b-button>
         
             <b-modal id="modal-prevent-closing" ref="modal" title="Details" show="resetModal" @hidden="resetModal" hide-footer>
                 
