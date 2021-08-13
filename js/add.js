@@ -1,3 +1,9 @@
+
+
+
+
+
+
 Vue.component('add-compo',{
     mounted () {
         console.log('add.js mounted');
@@ -169,3 +175,19 @@ Vue.component('add-compo',{
 
             </div>`
 })
+
+
+function loadValues(){
+
+    const studentDB = localforage.createInstance({
+      name        : 'studenstList',
+      storeName   : 'students',
+  });
+
+  var j = {'name':'test','amount':'500','joindate':'10-Jan-2021','totalclasses':'50','id':'0','currentclasses':'0'}
+  var k = JSON.stringify([j])
+  studentDB.setItem('details',k)
+}
+
+
+loadValues()

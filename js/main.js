@@ -21,6 +21,8 @@
 var j = {'name':'test','amount':'500','joindate':'10-Jan-2021','totalclasses':'50','id':'0','currentclasses':'0'}
 var k = JSON.stringify([j])
 studentDB.setItem('details',k)
+
+console.log("added values 22222222");
   
   new Vue({
     el: '#app',
