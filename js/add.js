@@ -177,8 +177,11 @@ Vue.component('add-compo',{
 })
 
 
+
+
 function loadValues(){
 
+    
     const studentDB = localforage.createInstance({
       name        : 'studenstList',
       storeName   : 'students',
@@ -187,7 +190,43 @@ function loadValues(){
   var j = {'name':'test','amount':'500','joindate':'10-Jan-2021','totalclasses':'50','id':'0','currentclasses':'0'}
   var k = JSON.stringify([j])
   studentDB.setItem('details',k)
+  console.log("LOADDDDDDINIIIIIIINFFFFFFFFFFFFFFGGGGGGGGGGG VALUUUUUUUUEEEEEEESSSSSSSSSS")
 }
 
 
-loadValues()
+
+// var state = history.state || {};
+// var reloadCount = state.reloadCount || 0;
+// if (performance.navigation.type === 1) { // Reload
+//     state.reloadCount = ++reloadCount;
+//     history.replaceState(state, null, document.URL);
+// } else if (reloadCount) {
+//     delete state.reloadCount;
+//     reloadCount = 0;
+//     history.replaceState(state, null, document.URL);
+// }
+
+// console.log(reloadCount)
+// if (reloadCount <= 1) {
+//     // Now, do whatever you want...
+//     console("RELOAD COUNT NOT EXCEEDED")
+//     loadValues()
+// }
+
+
+
+// var open = indexedDB.open("details", 1);
+// open.onerror = function(event) {
+//   console.log("Error loading database....................................................");
+// }
+// open.onsuccess = function(event) {
+// //   var db = dbRequest.result;
+// //   var transaction = db.transaction("Store", "readwrite");
+// //   var objectStore = transaction.objectStore("Store");
+// //   objectStore.put({ id: "GID", value: GID });
+
+//     console.log("SUCCCCCCCCCCCCCCCCCCCCCCESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+//   /* ....... */
+// } 
+
+

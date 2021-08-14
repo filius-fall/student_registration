@@ -47,8 +47,21 @@ let listView = {
         },
         populateStudents(){
             studentDB.getItem('details').then((data)=>{
-                this.studentsList = JSON.parse(data);
-                // console.log(this.studentsList['name'].sort())
+                if(data){
+                    console.log(data)
+                    console.log(typeof(data))
+                    this.studentsList = JSON.parse(data);
+                    console.log(this.studentsList)
+                }
+                else{
+
+
+                    var j = {'name':'test','amount':'500','joindate':'10-Jan-2021','totalclasses':'50','id':'0','currentclasses':'0'}
+
+                    this.studentsList = j
+
+
+                }
                 
             })    
         },
@@ -59,7 +72,7 @@ let listView = {
         settingDetails(){
             studentDB.length().then( (value)=> {
                 if(value === 0){
-                    var details = {};
+                    var details = [];
                     let jsonformat = JSON.stringify(details)
                     console.log('NOTHING IN HERE');
                     studentDB.setItem('details',jsonformat).then(()=>{
@@ -78,7 +91,6 @@ let listView = {
         },
         EditSubmit(data,index){
             console.log(this.studentsList[index]['name'])
-            // this.delDetails(data,index);
             console.log(data);
             this.studentsList.splice(index,1);
             this.studentsList.push(data);
@@ -116,30 +128,33 @@ let listView = {
         }
     
     },
-    // computed: {
-    //     sorted(){
-    //         return this.studentsList.sort((a,b) => {
-    //             let modifier = 1;
-    //             if(this.currentSortDir == 'desc') modifier = -1;
-    //             if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
-    //             if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
-    //             return 0;
-    //         )};
-    //     }
-    // },
     computed:{
         sortedList:function() {
-          return this.studentsList.sort((a,b) => {
-            let modifier = 1;
-            if(this.currentSortDir === 'desc') modifier = -1;
-            if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
-            if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
-            return 0;
-          }).filter((row,index) => {
-              let start = (this.CurrentPage-1) * this.PageSize;
-              let end = (this.CurrentPage) * this.PageSize;
-              if((index >= start) && (index < end)) return true;
-          });
+
+            localforage.getItem('details').then(function(value){
+                console.log(value)
+                if (!value){
+                    return [{"name":"test","id":"0","amount":"500","joindate":"10","totalclasses":'11',"currentclasses":'0'}]
+                }
+                else{
+                    return this.studentsList.sort((a,b) => {
+                        let modifier = 1;
+                        if(this.currentSortDir === 'desc') modifier = -1;
+                        if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
+                        if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
+                        return 0;
+                      }).filter((row,index) => {
+                          let start = (this.CurrentPage-1) * this.PageSize;
+                          let end = (this.CurrentPage) * this.PageSize;
+                          if((index >= start) && (index < end)) return true;
+                      });
+                }
+              }).catch(function(err){
+                console.log(err)
+
+              
+              })
+          
         }
       },
     props:['values'],
@@ -202,7 +217,7 @@ let listView = {
                                         <td v-for="keys,values in studentHeader"><p>{{ data[values] }}</p></td>
                                     </tr>
 
-                                    <tr v-for="data,index in sortedList" v-if="searchList == ''">
+                                    <tr v-for="data,index in studentsList" v-if="searchList == ''">
                                         <td v-for="keys,values in studentHeader">
                                             <p>{{ data[values] }}</p>
                                         </td>
@@ -220,7 +235,7 @@ let listView = {
                             <table class="table modTable">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th class="modTable_th">Modify</th>
+                                    <th class="modTable_th">Current Classes</th>
                                 </tr>
 
                             </thead>
